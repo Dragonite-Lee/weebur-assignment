@@ -25,5 +25,8 @@ export async function getProducts(params: {
     next: { revalidate: 60 },
   });
   if (!res.ok) throw new Error("Failed fetch Products");
-  return res.json() as Promise<ProductsResponse>;
+  const data = (await res.json()) as ProductsResponse;
+  
+
+  return JSON.parse(JSON.stringify(data));
 }

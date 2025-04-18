@@ -1,16 +1,34 @@
-import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "@/services/productService";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-export function useGetProducts(params: {
-  limit?: number;
-  skip?: number;
-  sortBy?: string;
-  order?: "asc" | "desc";
-  q?: string;
-}) {
-  return useQuery({
-    queryKey: ["products", params],
-    queryFn: () => getProducts(params),
-    enabled: !params.q || !!params.q?.trim(), // q가 없거나 빈 문자열이 아니면 실행
+import { getProducts } from "@/services/productService";
+import { ProductFilters } from "@/types/productType";
+
+import { productQueryKeys } from "./productKeys";
+
+export function useInfiniteProducts(filters: ProductFilters) {
+  return useInfiniteQuery({
+    queryKey: filters.q
+      ? productQueryKeys.products.searchList(filters)
+      : productQueryKeys.products.list(filters),
+    queryFn: ({ pageParam = 0 }) =>
+      getProducts({
+        ...filters,
+        skip: pageParam,
+        limit: 20,
+      }),
+    getNextPageParam: (lastPage, allPages) => {
+      const totalFetched = allPages.reduce(
+        (sum, page) => sum + page.products.length,
+        0
+      );
+      if (totalFetched >= lastPage.total) return undefined;
+      return totalFetched;
+    },
+    initialPageParam: 0,
+    enabled: !filters.q || !!filters.q?.trim(),
+    select: (data) => {
+      const products = data.pages.flatMap((page) => page.products);
+      return JSON.parse(JSON.stringify(products));
+    },
   });
 }

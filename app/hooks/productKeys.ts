@@ -1,8 +1,4 @@
-export type ProductFilters = {
-  q?: string;
-  sortBy?: string;
-  order?: "asc" | "desc";
-};
+import { ProductFilters } from "@/types/productType";
 
 export const productQueryKeys = {
   all: ["products"] as const,

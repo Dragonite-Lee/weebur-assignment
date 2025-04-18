@@ -1,7 +1,6 @@
-import { QueryClientProvider } from "@tanstack/react-query";
 import type { Metadata } from "next";
 
-import { queryClient } from "@/lib/queryClient";
+import Provider from "@/lib/queryClient";
 
 import "./globals.css";
 
@@ -18,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

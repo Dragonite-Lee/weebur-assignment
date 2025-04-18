@@ -23,3 +23,9 @@ export interface ProductsResponse {
   skip: number;
   limit: number;
 }
+
+export type ProductFilters = {
+  q?: string;
+  sortBy?: string;
+  order?: 'asc' | 'desc';
+};
