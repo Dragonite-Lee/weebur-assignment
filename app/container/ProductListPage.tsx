@@ -79,7 +79,21 @@ export default function ProductList() {
       <main className="px-4 pt-4" aria-live="polite">
         <ViewList products={products} />
       </main>
-      {isFetchingNextPage && <div>Loading more...</div>}
+      {isFetchingNextPage && (
+        <div className="flex justify-center py-6">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+            <p className="text-sm text-gray-600">로딩 중...</p>
+          </div>
+        </div>
+      )}
+      {!hasNextPage && !isFetchingNextPage && products.length > 0 && (
+        <div className="flex justify-center py-6">
+          <p className="rounded-full bg-gray-100 px-4 py-2 text-sm text-gray-500">
+            더 이상 불러올 수 없습니다.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
