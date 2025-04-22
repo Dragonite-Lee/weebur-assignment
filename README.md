@@ -54,7 +54,7 @@ NotFound.tsx로 검색 결과 없을 시 "일치하는 결과가 없습니다." 
 빌드 도구: Next.js
 
 📦 디렉토리 구조
-
+```
 src/ 
 ├── app/ # Next.js 앱 라우팅 
 │ ├── favicon.ico # 파비콘 
@@ -87,6 +87,7 @@ src/
  ├── formatDate.ts # 날짜 포맷팅 유틸 
  ├── handleViewType.ts # 뷰 타입 관리 유틸 
  └── index.ts # 유틸 내보내기
+```
 
 📝 작업 내용 설명
 
