@@ -28,4 +28,5 @@ export type ProductFilters = {
   q?: string;
   sortBy?: string;
   order?: 'asc' | 'desc';
+  limit?: number
 };

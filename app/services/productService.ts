@@ -1,32 +1,34 @@
-import { ProductsResponse } from "@/types/productType";
+import { ProductFilters, ProductsResponse } from "@/types/productType";
 
-const BASE_URL = "https://dummyjson.com/products";
+export async function getProducts({
+  q,
+  sortBy,
+  order,
+  skip = 0,
+  limit = 20,
+}: ProductFilters & { skip?: number }): Promise<ProductsResponse> {
+  let base_url = "https://dummyjson.com/products";
+  const params = new URLSearchParams();
 
-export async function getProducts(params: {
-  limit?: number;
-  skip?: number;
-  sortBy?: string;
-  order?: "asc" | "desc";
-  q?: string;
-}) {
-  const { limit = 20, skip = 0, sortBy, order, q } = params;
+  if (sortBy) params.append("sortBy", sortBy);
+  if (order) params.append("order", order);
+  params.append("skip", skip.toString());
+  params.append("limit", limit.toString());
 
-  const url = new URL(q ? `${BASE_URL}/search` : BASE_URL);
+  if (q && q.trim()) {
+    base_url += `/search?q=${encodeURIComponent(q)}`;
+    if (params.toString()) {
+      base_url += `&${params.toString()}`;
+    }
+  } else {
+    if (params.toString()) {
+      base_url += `?${params.toString()}`;
+    }
+  }
 
-  url.searchParams.append("limit", limit.toString());
-  url.searchParams.append("skip", skip.toString());
-  if (sortBy) url.searchParams.append("sortBy", sortBy);
-  if (order) url.searchParams.append("order", order);
-  if (q) url.searchParams.append("q", q);
-
-  const res = await fetch(url.toString(), {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) throw new Error("Failed fetch Products");
-  const data = (await res.json()) as ProductsResponse;
-  
-
-  return JSON.parse(JSON.stringify(data));
+  const response = await fetch(base_url);
+  if (!response.ok) {
+    throw new Error("Failed to fetch products");
+  }
+  return response.json();
 }

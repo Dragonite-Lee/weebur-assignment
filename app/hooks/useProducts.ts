@@ -14,12 +14,11 @@ export function useInfiniteProducts(filters: ProductFilters) {
       getProducts({
         ...filters,
         skip: pageParam,
-        limit: 20,
       }),
     getNextPageParam: (lastPage, allPages) => {
       const totalFetched = allPages.reduce(
         (sum, page) => sum + page.products.length,
-        0
+        0,
       );
       if (totalFetched >= lastPage.total) return undefined;
       return totalFetched;
@@ -27,8 +26,7 @@ export function useInfiniteProducts(filters: ProductFilters) {
     initialPageParam: 0,
     enabled: !filters.q || !!filters.q?.trim(),
     select: (data) => {
-      const products = data.pages.flatMap((page) => page.products);
-      return JSON.parse(JSON.stringify(products));
+      return data.pages.flatMap((page) => page.products);
     },
   });
 }
