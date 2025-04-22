@@ -54,38 +54,39 @@ NotFound.tsx로 검색 결과 없을 시 "일치하는 결과가 없습니다." 
 빌드 도구: Next.js
 
 📦 디렉토리 구조
+
 src/
-├── app/                 # Next.js 앱 라우팅
-│   ├── favicon.ico      # 파비콘
-│   ├── globals.css      # 전역 스타일
-│   ├── layout.tsx       # 레이아웃 컴포넌트
-│   └── page.tsx         # 메인 페이지
-├── components/          # 재사용 가능한 컴포넌트
-│   ├── product/         # 상품 관련 컴포넌트
-│   │   ├── Filter.tsx   # 필터 컴포넌트
-│   │   ├── index.ts     # 컴포넌트 내보내기
-│   │   ├── ViewCard.tsx # 상품 카드
-│   │   └── ViewList.tsx # 상품 리스트/그리드 뷰
-│   └── shared/          # 공통 컴포넌트
-│       ├── Error.tsx    # 에러 메시지
-│       ├── index.ts     # 컴포넌트 내보내기
-│       ├── Loading.tsx  # 로딩 UI
-│       └── NotFound.tsx # 검색 결과 없음 UI
-├── container/           # 페이지 컨테이너
-│   └── ProductListPage.tsx  # 상품 리스트 페이지
-├── hooks/               # 커스텀 훅스
-│   ├── productKeys.ts   # Tanstack Query 키 관리
-│   └── useProducts.ts   # 상품 데이터 페칭 훅스
-├── lib/                 # 외부 라이브러리 설정
-│   └── queryClient.tsx  # Tanstack Query 클라이언트 설정
-├── services/            # API 호출 서비스
-│   └── productService.ts  # 상품 관련 API 호출
-├── types/               # 타입스크립트 타입 정의
-│   └── productType.ts   # 상품 관련 타입
-└── utils/               # 유틸리티 함수
-├── formatDate.ts    # 날짜 포맷팅 유틸
-├── handleViewType.ts  # 뷰 타입 관리 유틸
-└── index.ts         # 유틸 내보내기
+├── app/                    # Next.js 앱 라우팅
+│   ├── favicon.ico         # 파비콘
+│   ├── globals.css         # 전역 스타일
+│   ├── layout.tsx          # 레이아웃 컴포넌트
+│   └── page.tsx            # 메인 페이지
+├── components/             # 재사용 가능한 컴포넌트
+│   ├── product/            # 상품 관련 컴포넌트
+│   │   ├── Filter.tsx      # 필터 컴포넌트
+│   │   ├── index.ts        # 컴포넌트 내보내기
+│   │   ├── ViewCard.tsx    # 상품 카드
+│   │   └── ViewList.tsx    # 상품 리스트/그리드 뷰
+│   └── shared/             # 공통 컴포넌트
+│       ├── Error.tsx       # 에러 메시지
+│       ├── index.ts        # 컴포넌트 내보내기
+│       ├── Loading.tsx     # 로딩 UI
+│       └── NotFound.tsx    # 검색 결과 없음 UI
+├── container/              # 페이지 컨테이너
+│   └── ProductListPage.tsx # 상품 리스트 페이지
+├── hooks/                  # 커스텀 훅스
+│   ├── productKeys.ts      # Tanstack Query 키 관리
+│   └── useProducts.ts      # 상품 데이터 페칭 훅스
+├── lib/                    # 외부 라이브러리 설정
+│   └── queryClient.tsx     # Tanstack Query 클라이언트 설정
+├── services/               # API 호출 서비스
+│   └── productService.ts   # 상품 관련 API 호출
+├── types/                  # 타입스크립트 타입 정의
+│   └── productType.ts      # 상품 관련 타입
+└── utils/                  # 유틸리티 함수
+├── formatDate.ts       # 날짜 포맷팅 유틸
+├── handleViewType.ts   # 뷰 타입 관리 유틸
+└── index.ts            # 유틸 내보내기
 
 📝 작업 내용 설명
 
